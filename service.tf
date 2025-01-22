@@ -1,9 +1,8 @@
 resource "aws_ecs_service" "main" {
   name    = var.service_name
   cluster = var.cluster_name
-
   task_definition = aws_ecs_task_definition.main.arn
-
+  force_new_deployment = true
   desired_count = var.service_task_count
 
   # launch_type = var.service_launch_type
