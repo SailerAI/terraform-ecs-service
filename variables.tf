@@ -2,7 +2,9 @@ variable "region" {
   type        = string
   description = "Região onde os recursos do AWS serão provisionados."
 }
-
+ variable "environment" {
+   
+ }
 variable "service_name" {
   type        = string
   description = "Nome do serviço a ser utilizado no ECS ou identificador similar."
@@ -38,10 +40,10 @@ variable "service_memory" {
   description = "Quantidade de memória alocada para o serviço, especificada em MB."
 }
 
-variable "service_listener" {
-  type        = string
-  description = "ARN do listener do Application Load Balancer que será usado pelo serviço."
-}
+#variable "service_listener" {
+#  type        = string
+#  description = "ARN do listener do Application Load Balancer que será usado pelo serviço."
+#}
 
 variable "service_task_execution_role" {
   type        = string
@@ -194,12 +196,12 @@ variable "scale_tracking_cpu" {
   default     = 80
 }
 
-variable "alb_arn" {
-  type        = string
-  description = "ARN do Application Load Balancer usado para rastreamento de solicitações."
-  default     = null
-}
-
+#variable "alb_arn" {
+#  type        = string
+#  description = "ARN do Application Load Balancer usado para rastreamento de solicitações."
+#  default     = null
+#}
+#
 variable "scale_tracking_requests" {
   type        = number
   description = "Número alvo de solicitações por segundo (TPS) para o rastreamento de escala."
@@ -209,4 +211,37 @@ variable "scale_tracking_requests" {
 variable "container_image" {
   type        = string
   description = "Imagem do container a ser utilizada no serviço."
+}
+
+## Variables Load Balancer
+
+variable "load_balancer_internal" {
+  description = "Se o load balancer é interno"
+  type        = bool
+}
+
+variable "load_balancer_type" {
+  description = "Tipo do load balancer"
+  type        = string
+}
+
+variable "ssm_vpc_id" {
+  description = "ID do VPC"
+  type        = string
+}
+
+variable "ssm_public_subnet_ids" {
+  description = "IDs das subredes públicas"
+  type        = list(string)
+  sensitive   = false
+}
+
+variable "ssm_private_subnet_ids" {
+  description = "IDs das subredes privadas"
+  type        = list(string)
+}
+
+variable "ssm_database_subnet_ids" {
+  description = "IDs das subredes de banco de dados"
+  type        = list(string)
 }

@@ -1,5 +1,5 @@
 resource "aws_alb_listener_rule" "main" {
-  listener_arn = var.service_listener
+  listener_arn = aws_lb_listener.http.arn
 
   action {
     type             = "forward"
@@ -11,5 +11,17 @@ resource "aws_alb_listener_rule" "main" {
       values = var.service_hosts
     }
   }
+}
 
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn   = "arn:aws:acm:us-east-1:381491941618:certificate/35fec90d-08cf-4830-a6fa-bb13639ecad7"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.main.arn
+  }
 }

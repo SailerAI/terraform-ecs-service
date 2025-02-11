@@ -56,6 +56,6 @@ resource "aws_ecs_service" "main" {
 
   #   platform_version = "LATEST"
 
-  depends_on = []
+  depends_on = [ aws_lb.main ]
 
 }
