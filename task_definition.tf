@@ -19,6 +19,9 @@ resource "aws_ecs_task_definition" "main" {
       memory = var.service_memory
 
       essential = true
+      linuxParameters = {
+      initProcessEnabled = "true"
+      }
 
       portMappings = [
         {
