@@ -2,9 +2,9 @@ variable "region" {
   type        = string
   description = "Região onde os recursos do AWS serão provisionados."
 }
- variable "environment" {
-   
- }
+variable "environment" {
+
+}
 variable "service_name" {
   type        = string
   description = "Nome do serviço a ser utilizado no ECS ou identificador similar."
@@ -244,4 +244,28 @@ variable "ssm_private_subnet_ids" {
 variable "ssm_database_subnet_ids" {
   description = "IDs das subredes de banco de dados"
   type        = list(string)
+}
+
+## Variables to use secrets ans ssm parameters store at task definition------
+variable "secret_names" {
+  description = "Lista de nomes dos segredos no AWS Secrets Manager"
+  type = list(string)
+  default = []
+}
+
+variable "ssm_parameter_names" {
+  description = "Lista de nomes dos parâmetros no AWS SSM Parameter Store"
+  type = list(object({
+    name : string
+    valueFrom : string
+  }))
+  default = []
+}
+variable "secrets" {
+    description = "Lista de nomes dos parâmetros no AWS SSM Parameter Store"
+  type = list(object({
+    name : string
+    valueFrom : string
+  }))
+  default = []
 }

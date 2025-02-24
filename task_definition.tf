@@ -38,10 +38,19 @@ resource "aws_ecs_task_definition" "main" {
           awslogs-stream-prefix = var.service_name
         }
       }
-
-      environment = var.environment_variables
-    }
-  ])
-
+    environment = var.environment_variables
+    secrets = concat(
+      [for name, secret in data.aws_secretsmanager_secret.secrets : { 
+        name      = name
+        valueFrom = secret.arn
+      }],
+      [for name, param in data.aws_ssm_parameter.ssm_params : { 
+        name      = name
+        valueFrom = param.arn  # Correção aqui
+      }],
+      var.secrets 
+    )
+  }
+])
 
 }

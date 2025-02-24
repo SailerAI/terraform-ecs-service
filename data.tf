@@ -20,3 +20,17 @@ data "aws_ssm_parameter" "database_subnet_ids" {
   count = length(var.ssm_database_subnet_ids)
   name  = element(var.ssm_database_subnet_ids, count.index)
 }
+
+
+## Get ARNs on Secrets Managers
+
+data "aws_secretsmanager_secret" "secrets" {
+  for_each = toset(var.secret_names)
+  name     = each.value
+}
+
+# Get ARNs on AWS SSM Parameter Store
+data "aws_ssm_parameter" "ssm_params" {
+  for_each = toset(var.ssm_parameter_names)
+  name     = each.value
+}
