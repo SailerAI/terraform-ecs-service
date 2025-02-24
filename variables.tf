@@ -15,10 +15,10 @@ variable "cluster_name" {
   description = "Nome do cluster ECS onde o serviço será implantado."
 }
 
-variable "vpc_id" {
-  type        = string
-  description = "ID da VPC onde os recursos relacionados ao serviço serão provisionados."
-}
+#variable "vpc_id" {
+#  type        = string
+#  description = "ID da VPC onde os recursos relacionados ao serviço serão provisionados."
+#}
 
 variable "private_subnets" {
   type        = list(string)
