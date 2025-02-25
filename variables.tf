@@ -270,3 +270,7 @@ variable "secrets" {
   }))
   default = []
 }
+
+variable "certificate_arn" {
+  type = string
+}
