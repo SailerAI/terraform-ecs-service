@@ -244,6 +244,7 @@ variable "ssm_private_subnet_ids" {
 variable "ssm_database_subnet_ids" {
   description = "IDs das subredes de banco de dados"
   type        = list(string)
+  default = [  ]
 }
 
 ## Variables to use secrets ans ssm parameters store at task definition------
