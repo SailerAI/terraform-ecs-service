@@ -20,10 +20,10 @@ variable "cluster_name" {
 #  description = "ID da VPC onde os recursos relacionados ao serviço serão provisionados."
 #}
 
-variable "private_subnets" {
-  type        = list(string)
-  description = "Lista de IDs das subnets privadas onde o serviço será implantado."
-}
+#variable "private_subnets" {
+#  type        = list(string)
+#  description = "Lista de IDs das subnets privadas onde o serviço será implantado."
+#}
 
 variable "service_port" {
   type        = number
