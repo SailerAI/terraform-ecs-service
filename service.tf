@@ -37,7 +37,7 @@ resource "aws_ecs_service" "main" {
       aws_security_group.main.id
     ]
 
-    subnets          = data.ssm_private_subnet_ids.value
+    subnets          = data.aws_ssm_parameter.private_subnet_ids[*].value
     assign_public_ip = false
   }
 
