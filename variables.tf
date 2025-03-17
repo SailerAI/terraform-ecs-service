@@ -1,43 +1,43 @@
 variable "region" {
   type        = string
-  description = "Região onde os recursos do AWS serão provisionados."
+  description = "Region where AWS resources will be provisioned."
 }
 variable "environment" {
 
 }
 variable "service_name" {
   type        = string
-  description = "Nome do serviço a ser utilizado no ECS ou identificador similar."
+  description = "Name of the service to be used in ECS or similar identifier."
 }
 
 variable "cluster_name" {
   type        = string
-  description = "Nome do cluster ECS onde o serviço será implantado."
+  description = "Name of the ECS cluster where the service will be deployed."
 }
 
 #variable "vpc_id" {
 #  type        = string
-#  description = "ID da VPC onde os recursos relacionados ao serviço serão provisionados."
+#  description = "VPC ID where service-related resources will be provisioned."
 #}
 
 #variable "private_subnets" {
 #  type        = list(string)
-#  description = "Lista de IDs das subnets privadas onde o serviço será implantado."
+#  description = "List of private subnet IDs where the service will be deployed."
 #}
 
 variable "service_port" {
   type        = number
-  description = "Porta na qual o serviço estará acessível."
+  description = "Port on which the service will be accessible."
 }
 
 variable "service_cpu" {
   type        = number
-  description = "Quantidade de CPU alocada para o serviço, especificada em unidades de CPU do ECS."
+  description = "Amount of CPU allocated for the service, specified in ECS CPU units."
 }
 
 variable "service_memory" {
   type        = number
-  description = "Quantidade de memória alocada para o serviço, especificada em MB."
+  description = "Amount of memory allocated for the service, specified in MB."
 }
 
 #variable "service_listener" {
@@ -47,11 +47,11 @@ variable "service_memory" {
 
 variable "service_task_execution_role" {
   type        = string
-  description = "ARN da role de execução de tarefas do ECS que o serviço usará para executar."
+  description = "ARN of the ECS task execution role that the service will use to execute."
 }
 
 variable "service_launch_type" {
-  description = "Configuração dos Launch Types pelos capacity providers disponíveis no cluster"
+  description = "Configuration of Launch Types by capacity providers available in the cluster"
   type = list(object({
     capacity_provider = string
     weight            = number
@@ -64,81 +64,88 @@ variable "service_launch_type" {
 
 variable "service_task_count" {
   type        = number
-  description = "Número de instâncias da tarefa a serem executadas simultaneamente no serviço."
+  description = "Number of task instances to be run simultaneously in the service."
 }
 
 variable "service_hosts" {
   type        = list(string)
-  description = "Lista de hosts associados ao serviço, geralmente especificados para configurações DNS."
+  description = "List of hosts associated with the service, typically specified for DNS configurations."
 }
 
 variable "service_healthcheck" {
   type        = map(any)
-  description = "Configuração do health check do serviço, incluindo caminho e protocolo."
+  description = "Service health check configuration, including path and protocol."
 }
 
 variable "environment_variables" {
   type        = list(map(string))
-  description = "Lista de variáveis de ambiente que serão passadas para o serviço."
+  description = "List of environment variables to be passed to the service."
 }
 
 variable "capabilities" {
   type        = list(string)
-  description = "Lista de capacidades, como EC2 ou FARGATE"
+  description = "List of capabilities, such as EC2 or FARGATE"
 }
 
+
+#### Scale ###
+variable "autoscaling_enabled" {
+  type = bool
+  description = "Enabled autoscaling to tasks"
+  default = false
+}
 variable "scale_type" {
   type        = string
-  description = "Tipo de escalabilidade, como 'cpu', 'cpu_tracking' ou 'requests_tracking'."
+  description = "Type of scaling, such as 'cpu', 'cpu_tracking', 'memory', or 'requests_tracking'."
   default     = null
 }
 
 variable "task_minimum" {
   type        = number
-  description = "Número mínimo de tarefas que devem ser executadas pelo serviço."
-  default     = 3
+  description = "Minimum number of tasks that should be running for the service."
+  default     = 1
 }
 
 variable "task_maximum" {
   type        = number
-  description = "Número máximo de tarefas que podem ser executadas pelo serviço."
-  default     = 10
+  description = "Maximum number of tasks that can be running for the service."
+  default     = 2
 }
 
 
 variable "scale_out_cpu_threshold" {
   type        = number
-  description = "Valor de limiar de utilização de CPU que, quando excedido, aciona uma ação de escala para cima, em percentual."
+  description = "CPU utilization threshold value that, when exceeded, triggers a scale-out action, in percentage."
   default     = 80
 }
 
 variable "scale_out_adjustment" {
   type        = number
-  description = "Quantidade de tarefas para aumentar durante uma ação de escala para cima."
+  description = "Number of tasks to increase during a scale-out action."
   default     = 1
 }
 
 variable "scale_out_comparison_operator" {
   type        = string
-  description = "Operador de comparação usado para a condição de escala para cima, como 'GreaterThanOrEqualToThreshold'."
+  description = "Comparison operator used for scale-out condition, such as 'GreaterThanOrEqualToThreshold'."
   default     = "GreaterThanOrEqualToThreshold"
 }
 
 variable "scale_out_statistic" {
   type        = string
-  description = "Estatística usada para a condição de escala para cima, como 'Average' ou 'Sum'."
+  description = "Statistic used for scale-out condition, such as 'Average' or 'Sum'."
   default     = "Average"
 }
 
 variable "scale_out_period" {
   type        = number
-  description = "Duração do período de avaliação para escala para cima, em segundos."
+  description = "Duration of the evaluation period for scaling out, in seconds."
   default     = 60
 }
 
 variable "scale_out_evaluation_periods" {
   type        = number
-  description = "Número de períodos de avaliação necessários para acionar uma escala para cima."
+  description = "Number of evaluation periods required to trigger a scale-out action."
   default     = 2
 }
 
@@ -150,7 +157,7 @@ variable "scale_out_cooldown" {
 
 variable "scale_in_cpu_threshold" {
   type        = number
-  description = "Valor de limiar de utilização de CPU que, quando abaixo, aciona uma ação de escala para baixo, em percentual."
+  description = "CPU utilization threshold value that, when below, triggers a scale-in action, in percentage."
   default     = 30
 }
 
@@ -162,25 +169,25 @@ variable "scale_in_adjustment" {
 
 variable "scale_in_comparison_operator" {
   type        = string
-  description = "Operador de comparação usado para a condição de escala para baixo, como 'LessThanOrEqualToThreshold'."
+  description = "Comparison operator used for scale-in condition, such as 'LessThanOrEqualToThreshold'."
   default     = "LessThanOrEqualToThreshold"
 }
 
 variable "scale_in_statistic" {
   type        = string
-  description = "Estatística usada para a condição de escala para baixo, como 'Average' ou 'Sum'."
+  description = "Statistic used for scale-in condition, such as 'Average' or 'Sum'."
   default     = "Average"
 }
 
 variable "scale_in_period" {
   type        = number
-  description = "Duração do período de avaliação para escala para baixo, em segundos."
+  description = "Duration of the evaluation period for scaling in, in seconds."
   default     = 120
 }
 
 variable "scale_in_evaluation_periods" {
   type        = number
-  description = "Número de períodos de avaliação necessários para acionar uma escala para baixo."
+  description = "Number of evaluation periods required to trigger a scale-in action."
   default     = 3
 }
 
@@ -193,6 +200,22 @@ variable "scale_in_cooldown" {
 variable "scale_tracking_cpu" {
   type        = number
   description = "Valor de utilização de CPU alvo para o rastreamento de escala, em percentual."
+  default     = 80
+}
+
+variable "scale_out_memory_threshold" {
+  type = number
+  description = "Memory utilization threshold value that, when below, triggers a scale-out action, in percentage."
+  default = 80 
+}
+variable "scale_in_memory_threshold" {
+  type = number
+  description = "Memory utilization threshold value that, when below, triggers a scale-in action, in percentage."
+  default = 30
+}
+variable "scale_tracking_memory" {
+  type        = number
+  description = "Valor de utilização de memory alvo para o rastreamento de escala, em percentual."
   default     = 80
 }
 
@@ -210,52 +233,52 @@ variable "scale_tracking_requests" {
 
 variable "container_image" {
   type        = string
-  description = "Imagem do container a ser utilizada no serviço."
+  description = "Container image to be used in the service."
 }
 
 ## Variables Load Balancer
 
 variable "load_balancer_internal" {
-  description = "Se o load balancer é interno"
+  description = "Whether the load balancer is internal"
   type        = bool
 }
 
 variable "load_balancer_type" {
-  description = "Tipo do load balancer"
+  description = "Type of load balancer"
   type        = string
 }
 
 variable "ssm_vpc_id" {
-  description = "ID do VPC"
+  description = "VPC ID"
   type        = string
 }
 
 variable "ssm_public_subnet_ids" {
-  description = "IDs das subredes públicas"
+  description = "Public subnet IDs"
   type        = list(string)
   sensitive   = false
 }
 
 variable "ssm_private_subnet_ids" {
-  description = "IDs das subredes privadas"
+  description = "Private subnet IDs"
   type        = list(string)
 }
 
 variable "ssm_database_subnet_ids" {
-  description = "IDs das subredes de banco de dados"
+  description = "Database subnet IDs"
   type        = list(string)
-  default = [  ]
+  default = []
 }
 
-## Variables to use secrets ans ssm parameters store at task definition------
+## Variables to use secrets and ssm parameters store at task definition------
 variable "secret_names" {
-  description = "Lista de nomes dos segredos no AWS Secrets Manager"
+  description = "List of secret names in AWS Secrets Manager"
   type = list(string)
   default = []
 }
 
 variable "ssm_parameter_names" {
-  description = "Lista de nomes dos parâmetros no AWS SSM Parameter Store"
+  description = "List of parameter names in AWS SSM Parameter Store"
   type = list(object({
     name : string
     valueFrom : string
@@ -263,7 +286,7 @@ variable "ssm_parameter_names" {
   default = []
 }
 variable "secrets" {
-    description = "Lista de nomes dos parâmetros no AWS SSM Parameter Store"
+    description = "List of parameter names in AWS SSM Parameter Store"
   type = list(object({
     name : string
     valueFrom : string
