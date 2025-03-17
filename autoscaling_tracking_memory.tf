@@ -1,4 +1,4 @@
-resource "aws_appautoscaling_policy" "target_tracking_cpu" {
+resource "aws_appautoscaling_policy" "target_tracking_memory" {
 
   count = var.autoscaling_enabled && var.scale_type == "memory_tracking" ? 1 : 0
 
