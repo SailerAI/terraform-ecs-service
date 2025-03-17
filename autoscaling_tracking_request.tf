@@ -11,7 +11,7 @@ resource "aws_appautoscaling_policy" "target_tracking_requests" {
   policy_type = "TargetTrackingScaling"
 
   target_tracking_scaling_policy_configuration {
-    target_value       = var.scale_tracking_cpu
+    target_value       = var.scale_tracking_requests
     scale_in_cooldown  = var.scale_in_cooldown
     scale_out_cooldown = var.scale_out_cooldown
 

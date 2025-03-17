@@ -151,7 +151,7 @@ variable "scale_out_evaluation_periods" {
 
 variable "scale_out_cooldown" {
   type        = number
-  description = "Período de cooldown após uma ação de escala para cima, em segundos."
+  description = "Cooldown period after a scale-out action, in seconds."
   default     = 60
 }
 
@@ -163,7 +163,7 @@ variable "scale_in_cpu_threshold" {
 
 variable "scale_in_adjustment" {
   type        = number
-  description = "Quantidade de tarefas para reduzir durante uma ação de escala para baixo."
+  description = "Number of tasks to reduce during a scale-in action."
   default     = -1
 }
 
@@ -193,13 +193,13 @@ variable "scale_in_evaluation_periods" {
 
 variable "scale_in_cooldown" {
   type        = number
-  description = "Período de cooldown após uma ação de escala para baixo, em segundos."
+  description = "Cooldown period after a scale-in action, in seconds."
   default     = 120
 }
 
 variable "scale_tracking_cpu" {
   type        = number
-  description = "Valor de utilização de CPU alvo para o rastreamento de escala, em percentual."
+  description = "Target CPU utilization value for scaling tracking, in percentage."
   default     = 80
 }
 
@@ -215,7 +215,7 @@ variable "scale_in_memory_threshold" {
 }
 variable "scale_tracking_memory" {
   type        = number
-  description = "Valor de utilização de memory alvo para o rastreamento de escala, em percentual."
+  description = "Target memory utilization value for scaling tracking, in percentage."
   default     = 80
 }
 
@@ -228,7 +228,7 @@ variable "scale_tracking_memory" {
 variable "scale_tracking_requests" {
   type        = number
   description = "Número alvo de solicitações por segundo (TPS) para o rastreamento de escala."
-  default     = 0
+  default     = 1
 }
 
 variable "container_image" {

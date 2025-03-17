@@ -27,6 +27,7 @@ No modules.
 | [aws_appautoscaling_policy.memory_high](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
 | [aws_appautoscaling_policy.memory_low](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
 | [aws_appautoscaling_policy.target_tracking_cpu](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
+| [aws_appautoscaling_policy.target_tracking_memory](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
 | [aws_appautoscaling_policy.target_tracking_requests](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_policy) | resource |
 | [aws_appautoscaling_target.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/appautoscaling_target) | resource |
 | [aws_cloudwatch_log_group.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
@@ -67,9 +68,9 @@ No modules.
 | <a name="input_load_balancer_internal"></a> [load\_balancer\_internal](#input\_load\_balancer\_internal) | Whether the load balancer is internal | `bool` | n/a | yes |
 | <a name="input_load_balancer_type"></a> [load\_balancer\_type](#input\_load\_balancer\_type) | Type of load balancer | `string` | n/a | yes |
 | <a name="input_region"></a> [region](#input\_region) | Region where AWS resources will be provisioned. | `string` | n/a | yes |
-| <a name="input_scale_in_adjustment"></a> [scale\_in\_adjustment](#input\_scale\_in\_adjustment) | Quantidade de tarefas para reduzir durante uma ação de escala para baixo. | `number` | `-1` | no |
+| <a name="input_scale_in_adjustment"></a> [scale\_in\_adjustment](#input\_scale\_in\_adjustment) | Number of tasks to reduce during a scale-in action. | `number` | `-1` | no |
 | <a name="input_scale_in_comparison_operator"></a> [scale\_in\_comparison\_operator](#input\_scale\_in\_comparison\_operator) | Comparison operator used for scale-in condition, such as 'LessThanOrEqualToThreshold'. | `string` | `"LessThanOrEqualToThreshold"` | no |
-| <a name="input_scale_in_cooldown"></a> [scale\_in\_cooldown](#input\_scale\_in\_cooldown) | Período de cooldown após uma ação de escala para baixo, em segundos. | `number` | `120` | no |
+| <a name="input_scale_in_cooldown"></a> [scale\_in\_cooldown](#input\_scale\_in\_cooldown) | Cooldown period after a scale-in action, in seconds. | `number` | `120` | no |
 | <a name="input_scale_in_cpu_threshold"></a> [scale\_in\_cpu\_threshold](#input\_scale\_in\_cpu\_threshold) | CPU utilization threshold value that, when below, triggers a scale-in action, in percentage. | `number` | `30` | no |
 | <a name="input_scale_in_evaluation_periods"></a> [scale\_in\_evaluation\_periods](#input\_scale\_in\_evaluation\_periods) | Number of evaluation periods required to trigger a scale-in action. | `number` | `3` | no |
 | <a name="input_scale_in_memory_threshold"></a> [scale\_in\_memory\_threshold](#input\_scale\_in\_memory\_threshold) | Memory utilization threshold value that, when below, triggers a scale-in action, in percentage. | `number` | `30` | no |
@@ -77,15 +78,15 @@ No modules.
 | <a name="input_scale_in_statistic"></a> [scale\_in\_statistic](#input\_scale\_in\_statistic) | Statistic used for scale-in condition, such as 'Average' or 'Sum'. | `string` | `"Average"` | no |
 | <a name="input_scale_out_adjustment"></a> [scale\_out\_adjustment](#input\_scale\_out\_adjustment) | Number of tasks to increase during a scale-out action. | `number` | `1` | no |
 | <a name="input_scale_out_comparison_operator"></a> [scale\_out\_comparison\_operator](#input\_scale\_out\_comparison\_operator) | Comparison operator used for scale-out condition, such as 'GreaterThanOrEqualToThreshold'. | `string` | `"GreaterThanOrEqualToThreshold"` | no |
-| <a name="input_scale_out_cooldown"></a> [scale\_out\_cooldown](#input\_scale\_out\_cooldown) | Período de cooldown após uma ação de escala para cima, em segundos. | `number` | `60` | no |
+| <a name="input_scale_out_cooldown"></a> [scale\_out\_cooldown](#input\_scale\_out\_cooldown) | Cooldown period after a scale-out action, in seconds. | `number` | `60` | no |
 | <a name="input_scale_out_cpu_threshold"></a> [scale\_out\_cpu\_threshold](#input\_scale\_out\_cpu\_threshold) | CPU utilization threshold value that, when exceeded, triggers a scale-out action, in percentage. | `number` | `80` | no |
 | <a name="input_scale_out_evaluation_periods"></a> [scale\_out\_evaluation\_periods](#input\_scale\_out\_evaluation\_periods) | Number of evaluation periods required to trigger a scale-out action. | `number` | `2` | no |
 | <a name="input_scale_out_memory_threshold"></a> [scale\_out\_memory\_threshold](#input\_scale\_out\_memory\_threshold) | Memory utilization threshold value that, when below, triggers a scale-out action, in percentage. | `number` | `80` | no |
 | <a name="input_scale_out_period"></a> [scale\_out\_period](#input\_scale\_out\_period) | Duration of the evaluation period for scaling out, in seconds. | `number` | `60` | no |
 | <a name="input_scale_out_statistic"></a> [scale\_out\_statistic](#input\_scale\_out\_statistic) | Statistic used for scale-out condition, such as 'Average' or 'Sum'. | `string` | `"Average"` | no |
-| <a name="input_scale_tracking_cpu"></a> [scale\_tracking\_cpu](#input\_scale\_tracking\_cpu) | Valor de utilização de CPU alvo para o rastreamento de escala, em percentual. | `number` | `80` | no |
-| <a name="input_scale_tracking_memory"></a> [scale\_tracking\_memory](#input\_scale\_tracking\_memory) | Valor de utilização de memory alvo para o rastreamento de escala, em percentual. | `number` | `80` | no |
-| <a name="input_scale_tracking_requests"></a> [scale\_tracking\_requests](#input\_scale\_tracking\_requests) | Número alvo de solicitações por segundo (TPS) para o rastreamento de escala. | `number` | `0` | no |
+| <a name="input_scale_tracking_cpu"></a> [scale\_tracking\_cpu](#input\_scale\_tracking\_cpu) | Target CPU utilization value for scaling tracking, in percentage. | `number` | `80` | no |
+| <a name="input_scale_tracking_memory"></a> [scale\_tracking\_memory](#input\_scale\_tracking\_memory) | Target memory utilization value for scaling tracking, in percentage. | `number` | `80` | no |
+| <a name="input_scale_tracking_requests"></a> [scale\_tracking\_requests](#input\_scale\_tracking\_requests) | Número alvo de solicitações por segundo (TPS) para o rastreamento de escala. | `number` | `1` | no |
 | <a name="input_scale_type"></a> [scale\_type](#input\_scale\_type) | Type of scaling, such as 'cpu', 'cpu\_tracking', 'memory', or 'requests\_tracking'. | `string` | `null` | no |
 | <a name="input_secret_names"></a> [secret\_names](#input\_secret\_names) | List of secret names in AWS Secrets Manager | `list(string)` | `[]` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | List of parameter names in AWS SSM Parameter Store | <pre>list(object({<br/>    name : string<br/>    valueFrom : string<br/>  }))</pre> | `[]` | no |
