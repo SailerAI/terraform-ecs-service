@@ -1,9 +1,9 @@
 resource "aws_appautoscaling_policy" "cpu_high" {
   count = var.scale_type == "cpu" ? 1 : 0
 
-  resource_id        = aws_appautoscaling_target.main.resource_id
-  service_namespace  = aws_appautoscaling_target.main.service_namespace
-  scalable_dimension = aws_appautoscaling_target.main.scalable_dimension
+  resource_id        = aws_appautoscaling_target.main[0].resource_id
+  service_namespace  = aws_appautoscaling_target.main[0].service_namespace
+  scalable_dimension = aws_appautoscaling_target.main[0].scalable_dimension
 
   name = format("%s-%s-cpu-scale-out", var.cluster_name, var.service_name)
 
@@ -49,9 +49,9 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
 resource "aws_appautoscaling_policy" "cpu_low" {
   count = var.autoscaling_enabled && var.scale_type == "cpu" ? 1 : 0
 
-  resource_id        = aws_appautoscaling_target.main.resource_id
-  service_namespace  = aws_appautoscaling_target.main.service_namespace
-  scalable_dimension = aws_appautoscaling_target.main.scalable_dimension
+  resource_id        = aws_appautoscaling_target.main[0].resource_id
+  service_namespace  = aws_appautoscaling_target.main[0].service_namespace
+  scalable_dimension = aws_appautoscaling_target.main[0].scalable_dimension
 
   name = format("%s-%s-cpu-scale-in", var.cluster_name, var.service_name)
 

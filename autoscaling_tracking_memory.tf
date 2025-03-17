@@ -4,9 +4,9 @@ resource "aws_appautoscaling_policy" "target_tracking_memory" {
 
   name = format("%s-%s-cpu-tracking", var.cluster_name, var.service_name)
 
-  resource_id        = aws_appautoscaling_target.main.resource_id
-  service_namespace  = aws_appautoscaling_target.main.service_namespace
-  scalable_dimension = aws_appautoscaling_target.main.scalable_dimension
+  resource_id        = aws_appautoscaling_target.main[0].resource_id
+  service_namespace  = aws_appautoscaling_target.main[0].service_namespace
+  scalable_dimension = aws_appautoscaling_target.main[0].scalable_dimension
 
   policy_type = "TargetTrackingScaling"
 
