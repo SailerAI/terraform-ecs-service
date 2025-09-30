@@ -4,12 +4,10 @@ resource "aws_security_group" "main" {
   vpc_id = data.aws_ssm_parameter.vpc_id.value
 
   ingress {
-    from_port = var.service_port
-    to_port   = var.service_port
-    protocol  = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"
-    ]
+    from_port   = var.service_port
+    to_port     = var.service_port
+    protocol    = "tcp"
+    cidr_blocks = var.create_load_balancer ? ["0.0.0.0/0"] : ["10.0.0.0/8"] # Exemplo: permitir apenas da VPC
   }
 
   egress {

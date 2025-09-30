@@ -15,6 +15,7 @@ variable "cluster_name" {
   description = "Nome do cluster ECS onde o serviço será implantado."
 }
 
+
 #variable "vpc_id" {
 #  type        = string
 #  description = "ID da VPC onde os recursos relacionados ao serviço serão provisionados."
@@ -214,7 +215,12 @@ variable "container_image" {
 }
 
 ## Variables Load Balancer
+variable "create_load_balancer" {
+  description = "Se um load balancer deve ser criado"
+  type        = bool
+  default     = true
 
+}
 variable "load_balancer_internal" {
   description = "Se o load balancer é interno"
   type        = bool
@@ -244,14 +250,14 @@ variable "ssm_private_subnet_ids" {
 variable "ssm_database_subnet_ids" {
   description = "IDs das subredes de banco de dados"
   type        = list(string)
-  default = [  ]
+  default     = []
 }
 
 ## Variables to use secrets ans ssm parameters store at task definition------
 variable "secret_names" {
   description = "Lista de nomes dos segredos no AWS Secrets Manager"
-  type = list(string)
-  default = []
+  type        = list(string)
+  default     = []
 }
 
 variable "ssm_parameter_names" {
@@ -263,7 +269,7 @@ variable "ssm_parameter_names" {
   default = []
 }
 variable "secrets" {
-    description = "Lista de nomes dos parâmetros no AWS SSM Parameter Store"
+  description = "Lista de nomes dos parâmetros no AWS SSM Parameter Store"
   type = list(object({
     name : string
     valueFrom : string
