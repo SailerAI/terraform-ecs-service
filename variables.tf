@@ -241,6 +241,12 @@ variable "ssm_public_subnet_ids" {
   type        = list(string)
   sensitive   = false
 }
+variable "task_ingress_cidrs_no_lb" {
+  description = "CIDR blocks to allow ingress to the task on service_port when no load balancer is created. Set to [] for no ingress."
+  type        = list(string)
+  default     = ["10.0.0.0/8"] # Exemplo: permite comunicação de dentro da VPC
+  # Para nenhum ingress, defina o default como []
+}
 
 variable "ssm_private_subnet_ids" {
   description = "IDs das subredes privadas"

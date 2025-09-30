@@ -1,4 +1,5 @@
 resource "aws_alb_listener_rule" "main" {
+  count        = var.create_load_balancer ? 1 : 0
   listener_arn = aws_lb_listener.http.arn
 
   action {
@@ -14,6 +15,7 @@ resource "aws_alb_listener_rule" "main" {
 }
 
 resource "aws_lb_listener" "https" {
+  count             = var.create_load_balancer ? 1 : 0
   load_balancer_arn = aws_lb.main.arn
   port              = "443"
   protocol          = "HTTPS"

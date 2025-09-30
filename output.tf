@@ -3,15 +3,16 @@ output "vpc_id" {
   sensitive = true
 }
 
-#output "load_balancer_arn" {
-#  value     = aws_ssm_parameter.lb_arn.id
-#  sensitive = true
-#}
+# output "load_balancer_arn" {
+#   value     = var.create_load_balancer ? aws_lb.main[0].arn : null # Condicional
+#   sensitive = true
+# }
 
-#output "load_balancer_listener_http_arn" {
-#  value     = aws_ssm_parameter.lb_listener_http_arn.id
-#  sensitive = true
-#}
+# output "load_balancer_listener_http_arn" {
+#   value     = var.create_load_balancer ? aws_lb_listener.http[0].arn : null # Condicional
+#   sensitive = true
+# }
+
 
 output "ssm_public_subnet_paths" {
   value = [
@@ -21,10 +22,10 @@ output "ssm_public_subnet_paths" {
   sensitive   = true
 }
 
-#output "load_balancer_dns" {
-#  value     = aws_lb.main.dns_name
-#  sensitive = true
-#} 
+# output "load_balancer_dns" {
+#   value     = var.create_load_balancer ? aws_lb.main[0].dns_name : null # Condicional
+#   sensitive = true
+# }
 
 output "ssm_private_subnet_paths" {
   value = [

@@ -1,5 +1,6 @@
 resource "aws_alb_target_group" "main" {
-  name = format("%s-%s", var.cluster_name, var.service_name)
+  count = var.create_load_balancer ? 1 : 0 # Adicione esta linha  
+  name  = format("%s-%s", var.cluster_name, var.service_name)
 
   port   = var.service_port
   vpc_id = data.aws_ssm_parameter.vpc_id.value
