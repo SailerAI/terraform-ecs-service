@@ -16,7 +16,7 @@ resource "aws_alb_listener_rule" "main" {
 
 resource "aws_lb_listener" "https" {
   count             = var.create_load_balancer ? 1 : 0
-  load_balancer_arn = aws_lb.main.arn
+  load_balancer_arn = aws_lb.main.0.arn
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
