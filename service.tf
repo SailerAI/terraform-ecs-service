@@ -38,7 +38,7 @@ resource "aws_ecs_service" "main" {
     ]
 
     subnets          = data.aws_ssm_parameter.private_subnet_ids[*].value
-    assign_public_ip = false
+    assign_public_ip = true
   }
 
   dynamic "load_balancer" {
