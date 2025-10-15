@@ -1,6 +1,6 @@
 resource "aws_alb_listener_rule" "main" {
   count        = var.create_load_balancer ? 1 : 0
-  listener_arn = aws_lb_listener.http.arn
+  listener_arn = aws_lb_listener.http.0.arn
 
   action {
     type             = "forward"
