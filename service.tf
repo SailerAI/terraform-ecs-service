@@ -44,7 +44,7 @@ resource "aws_ecs_service" "main" {
   dynamic "load_balancer" {
     for_each = aws_alb_listener_rule.main != null ? [1] : []
     content {
-      target_group_arn = aws_alb_target_group.main.arn
+      target_group_arn = aws_alb_target_group.main.0.arn
       container_name   = var.service_name
       container_port   = var.service_port
     }
