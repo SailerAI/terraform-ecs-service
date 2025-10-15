@@ -25,7 +25,7 @@ data "aws_ssm_parameter" "database_subnet_ids" {
 ## Get ARNs on Secrets Managers
 
 data "aws_secretsmanager_secret" "secrets" {
-  for_each = toset(format("/%s/%s/%s", var.environment, var.service_name, var.secret_names))
+  for_each = toset(var.secret_names)
   name     = each.value
 }
 
